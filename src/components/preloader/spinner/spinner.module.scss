@@ -1,0 +1,60 @@
+$pi: 3.141592653589793;
+$sizes: (
+  small: 20,
+  medium: 48,
+  large: 80,
+);
+$durations: (
+  small: 600ms,
+  medium: 750ms,
+  large: 950ms,
+);
+
+.wrapper {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.spinner {
+  .circle {
+    fill: none;
+    stroke-width: 2;
+    stroke-linecap: round;
+  }
+  @each $sizeKey, $size in $sizes {
+    $diameter: $size - 2;
+    $perimeter: $diameter * $pi;
+    &.size-#{$sizeKey} {
+      width: #{$diameter}px;
+      height: #{$diameter}px;
+      .circle {
+        animation: dash-#{$sizeKey} map-get($durations, $sizeKey) linear infinite;
+      }
+      @keyframes dash-#{$sizeKey} {
+        0% {
+          stroke-dasharray: $perimeter * 0.125, $perimeter * 0.875;
+          stroke-dashoffset: $perimeter * 0.25;
+        }
+        50% {
+          stroke-dasharray: $perimeter * 0.5, $perimeter * 0.5;
+        }
+        100% {
+          stroke-dasharray: $perimeter * 0.125, $perimeter * 0.875;
+          stroke-dashoffset: -$perimeter + ($perimeter * 0.25);
+        }
+      }
+    }
+  }
+}
+
+@keyframes rotate {
+  to {
+    transform: rotate(360deg);
+  }
+}
