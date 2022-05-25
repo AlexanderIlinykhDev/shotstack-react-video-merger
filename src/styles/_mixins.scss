@@ -1,0 +1,16 @@
+
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+}
+
+@mixin content-restrictor {
+  max-width: 1584px;
+  margin: 0 auto;
+  @media (max-width: 1980px)  {
+    max-width: 80%;
+  }
+}
+
