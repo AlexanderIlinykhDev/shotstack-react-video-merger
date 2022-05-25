@@ -1,9 +1,12 @@
-import React from "react";
-import logo from "./logo.svg";
-import styles from "./app.module.scss";
+import Router from "../../router/router";
+import Preloader from "../preloader";
 
 function App() {
-  return <div className={styles.app}>APP</div>;
+  return (
+    <Preloader>
+      <Router />
+    </Preloader>
+  );
 }
 
 export default App;
